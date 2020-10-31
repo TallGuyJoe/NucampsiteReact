@@ -4,12 +4,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
 
 class CampsiteInfo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            campsite: CAMPSITES,
-        };
-    }
+   
     renderCampsite(campsite) {
         return (
                 <div className="col-md-5 m-1">
@@ -48,13 +43,13 @@ class CampsiteInfo extends Component {
             return (
                 <div className="container">
                     <div className="row">
-                        {this.renderCampsite(this.state.campsite)}
-                        {this.renderComments(this.state.campsite.comments)}
+                        {this.renderCampsite(this.props.campsite)}
+                        {this.renderComments(this.props.campsite.comments)}
                     </div>
                 </div>
-                )
-            }
-            return <div />;
+            );
+        }
+        return <div />;
     }
 }
 
