@@ -1,8 +1,72 @@
-import React from 'react';
-import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import React, { Component } from 'react';
+import { 
+    Card, 
+    CardImg, 
+    CardText, 
+    CardBody, 
+    Breadcrumb, 
+    BreadcrumbItem, 
+    Button, 
+    Modal,
+    ModalHeader,
+    ModalBody,    
+    Label,
+    Row
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { LocalForm } from 'react-redux-form';
 
-   
+// week 4 assignment start
+class CommentForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isModalOpen: false,
+        }
+
+        this.toggleModal = this.toggleModal.bind(this);
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen,
+        });
+    }
+    render() {
+        return(
+            <div>
+                <Button className="fa fa-pencil fa-lg" onClick={this.toggleModal}>Submit Comment</Button>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+                    <ModalHeader>
+                    Submit Comment
+                    </ModalHeader>
+                    <ModalBody>
+                        <LocalForm>
+                        <Row className="form-group">
+                            <Label> Rating</Label>
+                            {/* <col md={10} />
+                            <Control.text 
+
+                            /> */}
+                        </Row>
+                        <Row className="form-group">
+                        Your Name
+                        </Row>
+                        <Row className="form-group">
+                        Comment
+                        </Row>
+                        <Button className="btn bg-primary">Submit</Button>
+                        </LocalForm>
+                    </ModalBody>
+                </Modal>
+
+            </div>
+        );
+    }
+}
+// week 4 assignment end
+
+
 function RenderCampsite({campsite}) {
     return (
         <div className="col-md-5 m-1">
@@ -29,6 +93,7 @@ function RenderComments({comments}) {
                         </div>
                     );
                 })}
+                <CommentForm />
             </div>
         );
     }
@@ -53,6 +118,7 @@ function CampsiteInfo(props) {
                     <RenderCampsite campsite={props.campsite} />
                     <RenderComments comments={props.comments} />
                 </div>
+                
             </div>
         );
     }
